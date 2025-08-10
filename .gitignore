@@ -1,0 +1,9 @@
+## Editors ##
+
+.idea/
+.vs/
+.vscode/
+
+## Emacs/Vim ##
+
+*~
