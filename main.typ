@@ -65,8 +65,8 @@
          br: [Java / LLVM-IR / ARM],
          tr: ghrepo("No-SF-Work/ayame"),
     )[
-        - 基于 *Martin-Löf 类型论*；支持 *dependent type*、dependent pattern matching、inductive datatype 等特性。实现了 propositional equality，使用 Normalization by Evaluation 进行等价检查，可实现简单的定理证明；
-        - 采用基于 *typeclass* 的 ad-hoc polymorphism，并基于此实现了*运算符重载*；实现了 *module system*，支持代码的命名空间和封装；
+        - 针对入库列表、出库列表、库存查询均治理过慢SQL优化，查询效率由2s优化提升至100ms；
+        - 针对部分；
         - 旨在作为实验平台，探索现代编程语言工具链（如编译器、IDE 等）的协同设计架构，提高编程语言开发的效率和可维护性。
     ]
 
