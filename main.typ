@@ -24,7 +24,7 @@
     )[
         - 参与商家组、会员组、库存组的项目开发，包含商家工作台、管理中心、集成系统的功能迭代与优化：
           - 主导ERP库存对接从0到1的项目开发，现已对接450个ERP系统，进行库存对接的商家达3000+；
-          - 参与库存管理、采购管理项目的开发，优化查询慢SQL达10余个，针对300w数据量的库存数据导入由5分钟优化至80s左右；
+          - 参与库存管理、采购管理项目的开发，优化查询慢SQL达20余个，针对300w数据量的库存数据导入由5分钟优化至80s左右；
           - v24.9.19 *二级事故救火*：在新版本发布后客户分组开放至全国，DBA反馈数据库CPU暴涨、客服反馈系统异常和页面空白等问题。本人在 10 分钟内通过网关追踪定位到问题接口，发现该接口进行了全量数据查询涉及26万+维修厂，紧急限流SQL查询并设计新方案进行热修发布，该紧急修复控制了事故影响范围，避免了影响全国范围的维修厂客户。
     ]
 
@@ -48,8 +48,8 @@
   == #fa[#project-diagram] 项目经历
 
     #cventry(
-        tl: [ERP库存对接管理系统],
-        bl: [外部ERP调用开思标准化接口或主动获取ERP数据实现库存对接 · 2024年开思金马团队奖],
+        tl: [Inventory Fusion Engine(库存融合引擎) · *2024年开思金马团队奖*],
+        bl: [主流程为库存对接，通过外部调用开思标准化接口或主动获取ERP数据实现;],
         br: [Java / SpringCloud],
         //tr: [#ghrepo("roife/vizsla") (WIP)],
     )[
@@ -60,49 +60,20 @@
     ]
 
     #cventry(
-         tl: [商家工作台-库存管理],
-         bl: [提升商家库存管理的便利性，包含库存、入库、出库、安全库存、库位、盘点、调拨、移位管理],
+         tl: [Central-Inventory Manager],
+         bl: [商家库存中心管理系统，包含库存、入库、出库、安全库存、库位、盘点、调拨、移位管理],
          br: [Java / SpringCloud],
          //tr: ghrepo("No-SF-Work/ayame"),
     )[
-        - 针对入库列表、出库列表、库存查询均治理过慢SQL优化，查询效率由2s优化提升至100ms；
-        - 基于*DDD*领域驱动设计 + 流程处理管理器（基于策略模式+模板方法实现）处理复杂的长流程实现，如创建入库单流程、安全库存批量导入；
+        - 针对入库列表、出库列表、库存查询均治理过慢SQL优化，在库存全量查询接口响应慢的问题中，通过分析SQL执行计划，给热点字段添加索引并调整or改为union，完美解决效率由1s优化提升至100ms；
+        - 基于*DDD*领域驱动设计 + 流程处理管理器（基于策略模式+模板方法实现）高效处理复杂的长流程，如创建入库单流程、安全库存批量导入。；
         - 基于EasyExcel实现了一套复用型的导出工具，以边读边写的方式防止内存溢出问题，最大可支持导出300w数据。
-    ]
-
-    #cventry(
-         tl: [商家工作台-采购管理],
-         bl: [为商家库存管理提效而设，包含库存、入库、出库、库位、盘点、调拨、移位管理],
-         br: [Java / LLVM-IR / ARM],
-         tr: ghrepo("No-SF-Work/ayame"),
-     )[
-         - 合作项目，个人主要负责编写面向 Machine IR 和体系结构的后端优化和代码生成，完成了基于图着色的*迭代寄存器合并*算法、*指令调度*、*死代码删除*、窥孔优化等，同时参与了部分语法树模块的编写；
-         - 同时负责项目的测试和 DevOps，利用 docker 和 GitLab CI 搭建了测试评估流程，并编写了 Python 脚本自动分析测试结果；
-         - 项目从零开始，完成了从语法解析到代码生成的完整编译器 pipeline，编写了大量 SSA IR 与 Machine IR 上的优化，最终在比赛中获一等奖。本项目在比赛中总排名第二，在*近一半样例上排名第一*，并在 1/3 的样例上优化效果超越 `gcc -O3` 与 `clang -O3`。
-    ]
-
-    #cventry(
-        tl: [商家工作台-库存管理],
-        bl: [],
-        br: [C++ / LLVM-IR],
-        tr: ghrepo("roife/llvm-lite"),
-    )[
-        - 课题旨在利用端侧推理设备已知的形状信息，对深度学习算子进行*二次编译优化*，以减少算子运行时的时空开销；
-        - 项目包含运行在推理设备的 LLVM IR *轻量编译器*和对 LLVM Codegen 模块的*裁剪工作*。针对目标 workloads，优化器选择性实现了*SCCP*、*DCE*等优化，裁剪工作移除了无关支持，且只保留必要优化，从而以最小的开销取得最好的优化结果；
-        - 毕业设计获得*优秀*评价。成功将 conv2d 算子和 softmax 算子的推理时间降低 *6%*，并将生成的二进制目标文件减小 *38%*；
     ]
 
     #cventry(
         tl: [其他个人项目],
     )[
-        - #ghrepo("Lambertcmd/super_u_edu") (SpringCloud/Vue，独立完成) 疫情期间个人独立完成在线教育系统项目，支持 Web 端；
-    ]
-
-    #cventry(
-        tl: [#fa[#code.branch] 开源社区贡献],
-    )[
-        - *#fa[#rust]* 负责维护官方 IDE（语言服务器）#ghrepo("rust-lang/rust-analyzer")；在 rust 社区也贡献过 #ghrepo("rust-lang/rust")，#ghrepo("rust-lang/rust-clippy")，#ghrepo("rust-lang/rustup")，#ghrepo("rust-lang/rust-mode") 等项目；
-        - #ghrepo("llvm/llvm-project")，#ghrepo("clangd/vscode-clangd")，#ghrepo("MikePopoloski/slang"), #ghrepo("google/autocxx")，#ghrepo("yuin/goldmark"), #ghrepo("moonbitlang/tree-sitter-moonbit")，更多项目见 #link("https://github.com/roife")[GitHub]。
+        - #ghrepo("Lambertcmd/super_u_edu") (SpringCloud / Vue，独立完成) 疫情期间个人独立完成在线教育系统项目，支持 Web 端；
     ]
 
   == #fa[#graduation-cap] 教育背景
@@ -138,13 +109,12 @@
             #list(marker: [‣],
                 [SpringBoot, SpringCloud, Mybatis-Plus等后端框架和RabbitMQ/Kafka消息中间件；],
                 [Elasticsearch存储引擎的使用和设计；Docker 和 CI/CD 配置等 DevOps 工作；],
-                [了解Camuda自动化流程引擎；]
-            )],     
+                [了解Camuda自动化流程引擎；擅于使用Cursor、通义灵码和AI Assistant进行代码优化与Code Review]
+            )], 
         [*开发环境*], [熟悉 IntelliJ IDEA 与 VS Code，习惯在 Windows 下工作；能简单使用生成式 AI 工具提高工作效率（如MCP）；],
     )
 
   == #fa[#th.list] 其他
 
-    - *社团工作*：曾担任北航开放原子开源社团的社长，组织过多次技术分享和企业交流活动；
-    - *技术博客*：#link("https://roife.github.io")[roife.github.io] 创作时间超 5 年，主要内容为理论计算机和课程笔记，曾帮助大量同学完成 lab，月访问量逾 1.5k；
-    - *外语*：英语。
+    - *业余工作*：擅于研究AI、大模型、翻阅博客，组织过多次技术分享会；
+    - *自我评价*：具有良好的编程习惯，要求命名规范，具有良好的分析能力，自学能力，逻辑能力，能够快速适应各种工作环境，擅长运动。
