@@ -50,7 +50,7 @@
     #cventry(
         tl: [ERP库存对接管理系统],
         bl: [外部ERP调用开思标准化接口或主动获取ERP数据实现库存对接 · 2024年开思金马团队奖],
-        br: [Java],
+        br: [Java / SpringCloud],
         //tr: [#ghrepo("roife/vizsla") (WIP)],
     )[
         - 实现了一套异构数据-数据清洗-价格库存调整-商品上架并报价自动化的库存对接系统；
@@ -61,17 +61,17 @@
 
     #cventry(
          tl: [商家工作台-库存管理],
-         bl: [提升商家库存管理的便利性，包含库存、入库、出库、库位、盘点、调拨、移位管理],
-         br: [Java / LLVM-IR / ARM],
-         tr: ghrepo("No-SF-Work/ayame"),
+         bl: [提升商家库存管理的便利性，包含库存、入库、出库、安全库存、库位、盘点、调拨、移位管理],
+         br: [Java / SpringCloud],
+         //tr: ghrepo("No-SF-Work/ayame"),
     )[
         - 针对入库列表、出库列表、库存查询均治理过慢SQL优化，查询效率由2s优化提升至100ms；
-        - 针对部分；
-        - 旨在作为实验平台，探索现代编程语言工具链（如编译器、IDE 等）的协同设计架构，提高编程语言开发的效率和可维护性。
+        - 基于*DDD*领域驱动设计 + 流程处理管理器（基于策略模式+模板方法实现）处理复杂的长流程实现，如创建入库单流程、安全库存批量导入；
+        - 基于EasyExcel实现了一套复用型的导出工具，以边读边写的方式防止内存溢出问题，最大可支持导出300w数据。
     ]
 
     #cventry(
-         tl: [商家工作台-库存管理],
+         tl: [商家工作台-采购管理],
          bl: [为商家库存管理提效而设，包含库存、入库、出库、库位、盘点、调拨、移位管理],
          br: [Java / LLVM-IR / ARM],
          tr: ghrepo("No-SF-Work/ayame"),
@@ -138,6 +138,7 @@
             #list(marker: [‣],
                 [SpringBoot, SpringCloud, Mybatis-Plus等后端框架和RabbitMQ/Kafka消息中间件；],
                 [Elasticsearch存储引擎的使用和设计；Docker 和 CI/CD 配置等 DevOps 工作；],
+                [了解Camuda自动化流程引擎；]
             )],     
         [*开发环境*], [熟悉 IntelliJ IDEA 与 VS Code，习惯在 Windows 下工作；能简单使用生成式 AI 工具提高工作效率（如MCP）；],
     )
